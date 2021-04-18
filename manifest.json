@@ -1,0 +1,16 @@
+{
+  "name": "Open URLs in private",
+  "manifest_version": 2,
+  "version": "1",
+  "icons": {
+	"16": "icon16.png",
+	"32": "icon32.png",
+	"64": "icon64.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Open URLs in private",
+    "default_icon": "icon16.png",
+	"default_popup": "index.html"
+  }
+}
