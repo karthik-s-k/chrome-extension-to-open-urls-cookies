@@ -3,8 +3,14 @@ body {
   font-size: 13px;
 }
 
+div {
+	font-size: 14px;
+    font-weight: 600;
+    margin-bottom: inherit;
+}
+
 main {
-  width: 400px;
+  width: 350px;
 }
 
 section {
@@ -13,7 +19,7 @@ section {
 
 textarea {
   width: calc(100% - 6px);
-  height: 300px;
+  height: 200px;
 
   font-family: monospace;
 
@@ -25,4 +31,41 @@ textarea {
 button {
   padding: 2px 4px;
   cursor: pointer;
+}
+
+label.mode-selection {
+  align-items: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+}
+
+label.action-selection {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+}
+
+input[type='radio'] {
+  flex: none;
+  margin-right: 5px;
+}
+
+#extract {
+  float: right;
+}
+
+#errorDisplay {
+	color: red;
+}
+
+.flex-grid {
+  display: flex;
+}
+.flex-col {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 45ch;
 }

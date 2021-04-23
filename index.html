@@ -5,16 +5,53 @@
 	<link rel="stylesheet" href="index.css" />    
   </head>
   <body>
+	<div>Bulk URL opener</div>
 	<main>
 		<section>
-			<label for="urls">List of URLs:</label>
-			<textarea id="urls" wrap="soft" tabindex="1"></textarea>
-		</section>
+			<label class="mode-selection">
+				<input type="radio" name="viewMode" id="normal" tabindex="3" checked="true" />
+				Normal mode
+			</label>
+
+			<label class="mode-selection">
+				<input type="radio" name="viewMode" id="private" tabindex="3" />
+				Private/Incognito mode
+			</label>
+		</section>	
+		
 		<section>
-			<button id="openButton" tabindex="2">Open URLs</button>
-      </section>
+			<label class="action-selection">
+				<input type="radio" name="userSelection" id="currentURL" tabindex="3" checked="true" />
+				Launch current active tab
+			</label>
+			
+			<label class="action-selection">
+				<input type="radio" name="userSelection" id="openURLs" tabindex="3" />
+				Launch all open tabs
+			</label>
+			
+			<label class="action-selection">
+				<input type="radio" name="userSelection" id="userURLs" tabindex="3" />
+				Type URLs to launch
+			</label>		
+			<br />
+			<section id="userInputSection">
+				<textarea id="urls" wrap="soft" tabindex="1"></textarea>
+			</section>						
+		</section>
+	  
+		<section>
+			<button id="submitButton" tabindex="2">Show URLs</button>
+			<button id="showCookieButton" tabindex="2">Show Cookies</button>
+			<button id="deleteCookieButton" tabindex="2">Delete Cookies</button>
+		</section>
+		
+		<section id="cookieDisplay"></section>
+		
+		<section id="errorDisplay"></section>
 	</main>
 	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="index.js"></script>
   </body>
 </html>
