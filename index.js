@@ -1,9 +1,42 @@
 let viewMode = false;
 let currentDomain = "";
+
+$("#urlLayout").show();
+$("#cookieLayout").hide();
+$("#errorLayout").hide();
+
 $("#userInputSection").hide();
-$("#cookieDisplay").hide();
-$("#errorDisplay").hide();
+
+$("#showURLButton").show();
+$("#showCookieButton").hide();
 $("#deleteCookieButton").hide();
+
+$("select").on("change", function() {
+	var optionSelected = $(this).find("option:selected");
+    var valueSelected  = optionSelected.val();
+	
+	$("#errorLayout").empty();
+	$("#errorLayout").hide();
+	
+	if(valueSelected === "url") {		
+		$("#actionType").text("Open bulk URL(s)");
+		$("#cookieLayout").hide();
+		$("#urlLayout").show();
+		
+		$("#showURLButton").show();
+		$("#showCookieButton").hide();
+		$("#deleteCookieButton").hide();
+	}
+	else if(valueSelected === "cookie") {
+		$("#actionType").text("Current tab cookie(s)");		
+		$("#cookieLayout").show();	
+		$("#urlLayout").hide();	
+		
+		$("#showURLButton").hide();
+		$("#showCookieButton").show();
+		$("#deleteCookieButton").hide();
+	}
+});
 
 $("input[name='userSelection']").on("click", function(){
 	if ($("#userURLs").is(":checked")) {
@@ -14,9 +47,9 @@ $("input[name='userSelection']").on("click", function(){
 	}
 });
 	
-$("#submitButton").on("click", function(){
-	$("#errorDisplay").empty();
-	$("#errorDisplay").hide();
+$("#showURLButton").on("click", function(){
+	$("#errorLayout").empty();
+	$("#errorLayout").hide();
 	
 	if ($("#private").is(":checked")) {
 	   viewMode = true;
@@ -30,8 +63,8 @@ $("#submitButton").on("click", function(){
 			chrome.windows.create({ url: url, "incognito": viewMode });
 		}
 		else {
-			$("#errorDisplay").append("<div>Incorrect URL</div>");
-			$("#errorDisplay").show();
+			$("#errorLayout").append("<div>Incorrect URL</div>");
+			$("#errorLayout").show();
 		}
 	}
 
@@ -62,29 +95,29 @@ $("#submitButton").on("click", function(){
 	}	
 });
 
-$("#showCookieButton").on("click", function(){	
-	$("#errorDisplay").empty();
-	$("#errorDisplay").hide();
+$("#showCookieButton").on("click", function(){		
+	$("#errorLayout").empty();
+	$("#errorLayout").hide();
 	
 	function getCookies(url) {      		
 		chrome.cookies.getAll({url: url}, function(cookie) {	
 			if(cookie.length < 1) {
-				$("#errorDisplay").append("<div>No cookies found</div>");
-				$("#errorDisplay").show();
+				$("#errorLayout").append("<div>No cookie found</div>");
+				$("#errorLayout").show();
 			}
 			else {
 				$("#showCookieButton").hide();
-				$("#cookieDisplay").empty();
+				$("#cookieData").empty();
 				$("#deleteCookieButton").show();
 			}
 			for(i=0;i<cookie.length;i++){
 				if(i < 1) {
 					currentDomain = cookie[i].domain;
-					$("#cookieDisplay").append("<div class='flex-grid'> Cookie Info [" + cookie[i].domain + " (" + cookie.length + " used)]" + "</div>");
+					$("#cookieData").append("<div class='flex-grid'> Cookie(s) in " + cookie[i].domain + " (" + cookie.length + " used)" + "</div>");
 				}
-				$("#cookieDisplay").append("<div class='flex-col'>" + cookie[i].name + ": " + cookie[i].value + "</div>");
+				$("#cookieData").append("<div class='flex-col'>" + cookie[i].name + ": " + cookie[i].value + "</div>");
 			}
-			$("#cookieDisplay").show();
+			$("#cookieData").show();
 		});		
 	}
 	
@@ -99,24 +132,23 @@ $("#showCookieButton").on("click", function(){
 			getCookies(url);
 		}
 		else {
-			$("#errorDisplay").append("<div>Incorrect URL " + url + "</div>");
-			$("#errorDisplay").show();
-			$("#showCookieButton").show();
+			$("#errorLayout").append("<div>Incorrect URL " + url + "</div>");
+			$("#errorLayout").show();
 		}
 	});
 });
 
 $("#deleteCookieButton").on("click", function(){	
-	$("#errorDisplay").empty();
-	$("#errorDisplay").hide();
-
+	$("#errorLayout").empty();
+	$("#errorLayout").hide();
+	
 	chrome.cookies.getAll({domain: currentDomain}, function(cookies) {
 		for(var i=0; i<cookies.length;i++) {
 			chrome.cookies.remove({url: "https://" + cookies[i].domain  + cookies[i].path, name: cookies[i].name});
 		}
 	});
 	
-	$("#cookieDisplay").empty();
+	$("#cookieData").empty();
 	$("#showCookieButton").show();
 	$("#deleteCookieButton").hide();
 });

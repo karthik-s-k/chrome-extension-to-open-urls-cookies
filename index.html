@@ -5,50 +5,62 @@
 	<link rel="stylesheet" href="index.css" />    
   </head>
   <body>
-	<div>Bulk URL opener</div>
-	<main>
-		<section>
-			<label class="mode-selection">
-				<input type="radio" name="viewMode" id="normal" tabindex="3" checked="true" />
-				Normal mode
-			</label>
+	<div id="actionType">Open bulk URL(s)</div>
 
-			<label class="mode-selection">
-				<input type="radio" name="viewMode" id="private" tabindex="3" />
-				Private/Incognito mode
-			</label>
-		</section>	
-		
+	<main>		
 		<section>
-			<label class="action-selection">
-				<input type="radio" name="userSelection" id="currentURL" tabindex="3" checked="true" />
-				Launch current active tab
+			<label for="actionType">
+				<select class="default" name="actionType" id="actionType">	  
+				  <option value="cookie">Cookie</option>
+				  <option value="url" selected>URL</option>
+				</select>
 			</label>
 			
-			<label class="action-selection">
-				<input type="radio" name="userSelection" id="openURLs" tabindex="3" />
-				Launch all open tabs
-			</label>
+			<button class="btn default" id="showURLButton">Open URL</button>
+			<button class="btn default" id="showCookieButton">Show Cookie</button>
+			<button class="btn danger" id="deleteCookieButton">Delete Cookie</button>
+		</section>
+	
+		<section id="urlLayout">
+			<section>
+				<label for="viewMode" class="mode-selection">
+					<input type="radio" name="viewMode" id="normal" checked="true" />
+					Normal mode
+				</label>
+
+				<label for="viewMode" class="mode-selection">
+					<input type="radio" name="viewMode" id="private" />
+					Private/Incognito mode
+				</label>
+			</section>
 			
-			<label class="action-selection">
-				<input type="radio" name="userSelection" id="userURLs" tabindex="3" />
-				Type URLs to launch
-			</label>		
-			<br />
+			<section>
+				<label for="userSelection" class="action-selection">
+					<input type="radio" name="userSelection" id="currentURL" checked="true" />
+					Launch current active tab
+				</label>
+				
+				<label for="userSelection" class="action-selection">
+					<input type="radio" name="userSelection" id="openURLs" />
+					Launch all open tabs
+				</label>
+				
+				<label for="userSelection" class="action-selection">
+					<input type="radio" name="userSelection" id="userURLs" />
+					Type URLs to launch
+				</label>	
+			</section>
+			
 			<section id="userInputSection">
-				<textarea id="urls" wrap="soft" tabindex="1"></textarea>
-			</section>						
-		</section>
-	  
-		<section>
-			<button id="submitButton" tabindex="2">Show URLs</button>
-			<button id="showCookieButton" tabindex="2">Show Cookies</button>
-			<button id="deleteCookieButton" tabindex="2">Delete Cookies</button>
+				<textarea id="urls" wrap="soft"></textarea>
+			</section>			
 		</section>
 		
-		<section id="cookieDisplay"></section>
+		<section id="cookieLayout">			
+			<section id="cookieData" />			
+		</section>
 		
-		<section id="errorDisplay"></section>
+		<section id="errorLayout" />
 	</main>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

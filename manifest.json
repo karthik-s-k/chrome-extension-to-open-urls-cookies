@@ -1,7 +1,7 @@
 {
   "name": "Open bulk URLs",
   "manifest_version": 2,
-  "version": "1",
+  "version": "1.0.0",
   "permissions": ["tabs", "cookies", "http://*/*", "https://*/*"],
   "icons": {
 	"16": "icon16.png",

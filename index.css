@@ -1,11 +1,11 @@
 body {
   font-family: sans-serif;
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 400;
 }
 
-div {
+#actionType {
 	font-size: 14px;
-    font-weight: 600;
     margin-bottom: inherit;
 }
 
@@ -28,9 +28,42 @@ textarea {
   overflow: auto;
 }
 
-button {
-  padding: 2px 4px;
+select, option {
+  border: 2px solid #e7e7e7;
+  background-color: white;
+  color: black;
+  padding: 4px 8px;
   cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn {
+  border: 2px solid #e7e7e7;
+  background-color: white;
+  color: black;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 5px;
+  float: right;
+}
+
+.default {
+  border-color: #e7e7e7;
+  color: black;
+}
+
+.default:hover {
+  background: #e7e7e7;
+}
+
+.danger {
+  border-color: #f44336;
+  color: red
+}
+
+.danger:hover {
+  background: #f44336;
+  color: white;
 }
 
 label.mode-selection {
@@ -51,21 +84,24 @@ input[type='radio'] {
   margin-right: 5px;
 }
 
-#extract {
-  float: right;
-}
-
-#errorDisplay {
-	color: red;
+#errorLayout {
+  color: red;
 }
 
 .flex-grid {
   display: flex;
 }
+
 .flex-col {
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 45ch;
+}
+
+.flex-col:hover{
+    transition: box-shadow 2s;
+	background-color: #ebebe0;
+	cursor: pointer;
 }
